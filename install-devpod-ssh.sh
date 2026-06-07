@@ -17,13 +17,10 @@ devpod-ssh() {
     echo "Starting DevPod and waiting for SSH..."
     devpod up . --ide none --silent &
     
-    # Ping the container until it answers
+    # Ping the container until it answers and drop into it
     while ! devpod ssh . -- -q -o ConnectTimeout=1 exit 2>/dev/null; do 
         sleep 1
     done
-    
-    # Drop into the interactive shell
-    devpod ssh .
 }
 EOF
 
